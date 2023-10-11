@@ -1,5 +1,6 @@
 package com.onur.alan.codingmaraton.components
 
+import android.graphics.Bitmap
 import android.graphics.drawable.shapes.Shape
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -44,6 +45,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
@@ -263,7 +265,7 @@ fun MyBottomAppBar(navController: NavController){
 }
 
 @Composable
-fun MyPost(name:String,painter: Painter,bio:String){
+fun MyPost(viewModel: MarathonViewModel,navController: NavController,name:String,bio:String,bitmap:Bitmap,userPP:Bitmap){
     Surface(modifier = Modifier
         .fillMaxWidth(0.9f)
         .fillMaxHeight(0.8f),
@@ -280,7 +282,8 @@ fun MyPost(name:String,painter: Painter,bio:String){
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
                 ) {
-                Image(painter = painterResource(id = R.drawable.filled_person), contentDescription ="", modifier = Modifier.size(30.dp) )
+
+                Image(bitmap = userPP.asImageBitmap(), contentDescription ="", modifier = Modifier.size(30.dp) )
                 Spacer(modifier = Modifier.width(5.dp))
                 Text(
                     text = name,
@@ -292,7 +295,7 @@ fun MyPost(name:String,painter: Painter,bio:String){
             Column(modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.8f)) {
-                Image(painter = painter,
+                Image(bitmap = bitmap.asImageBitmap(),
                     contentDescription ="",
                     modifier = Modifier.fillMaxSize() )
             }
@@ -328,7 +331,9 @@ fun MyPost(name:String,painter: Painter,bio:String){
 
                 }
 
-                IconButton(onClick = { /*TODO*/ },
+                IconButton(onClick = {
+                     navController.navigate(Screens.PostCommentScreen.route)
+                },
                 ) {
                     Icon(painter = painterResource(id = R.drawable.outline_comment),
                         contentDescription = "",

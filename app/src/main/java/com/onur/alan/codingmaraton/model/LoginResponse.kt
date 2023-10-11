@@ -10,6 +10,6 @@ data class LoginResponse(
     val score:Int,
     val bio:String,
     val userName:String,
-    val user_image: ByteArray
+    val user_image: ByteArray?
 
     )

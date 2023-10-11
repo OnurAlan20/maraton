@@ -32,6 +32,9 @@ import com.onur.alan.codingmaraton.R
 import com.onur.alan.codingmaraton.components.LoginTextField
 import com.onur.alan.codingmaraton.components.MyButton
 import com.onur.alan.codingmaraton.components.MyDoubleTextButton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(viewModel: MarathonViewModel,navController: NavController){
@@ -67,11 +70,17 @@ fun LoginScreen(viewModel: MarathonViewModel,navController: NavController){
                 LoginTextField(value = viewModel.loginPassword, placeHolder ="şifre", icon =Icons.Outlined.Lock )
                 Spacer(modifier = Modifier.height(35.dp))
                 MyButton(text = "GİRİŞ YAP") {
-                    viewModel.sendLogin()
-                    if (viewModel.loginResponse.value?.status == 200){
-                        navController.navigate(Screens.PostFeedScreen.route)
 
+                    CoroutineScope(Dispatchers.Main).launch {
+                        viewModel.sendLogin()
+
+                    }.invokeOnCompletion {
+                        if (viewModel.loginResponse.value?.status == 200){
+                            navController.navigate(Screens.LoginScreen.route)
+                        }
                     }
+
+
 
                 }
             }

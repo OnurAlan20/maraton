@@ -2,17 +2,14 @@ package com.onur.alan.codingmaraton.screens
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.painter.BitmapPainter
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.lifecycle.ViewModel
 import com.onur.alan.codingmaraton.model.GetSocialPostsResponseModel
 import com.onur.alan.codingmaraton.model.LoginRequestModel
 import com.onur.alan.codingmaraton.model.PostLoginResponseModel
 import com.onur.alan.codingmaraton.model.PostRegisterResponseModel
 import com.onur.alan.codingmaraton.model.RegisterRequestModel
-import com.onur.alan.codingmaraton.model.SocialPostsResponse
 import com.onur.alan.codingmaraton.network.APIService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,6 +31,10 @@ class MarathonViewModel:ViewModel(){
     var changeBioTextField = mutableStateOf("")
 
 
+    fun byteArrayToBitmap(byteArray: ByteArray): Bitmap {
+        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+    }
+
     //Retrofit
     lateinit var retrofit:Retrofit
     lateinit var apiService:APIService
@@ -44,7 +45,7 @@ class MarathonViewModel:ViewModel(){
             val client = OkHttpClient.Builder().build()
             retrofit = Retrofit.Builder()
                 .client(client)
-                .baseUrl("http://192.168.128.142:8081/") // API URL'sini buraya ekleyin
+                .baseUrl("http://159.138.21.194:8081/") // API URL'sini buraya ekleyin
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
@@ -60,9 +61,11 @@ class MarathonViewModel:ViewModel(){
     var registerPassword = mutableStateOf("")
 
     var registerResponse= mutableStateOf<PostRegisterResponseModel?>(null)
-    fun sendRegister(){
+
+
+
+    suspend fun sendRegister() {
         var myUser = RegisterRequestModel(registerEmail.value,registerFirstName.value,registerLastName.value,registerUserName.value,registerPassword.value)
-        CoroutineScope(Dispatchers.IO).launch {
             try {
                 val apiResponse = apiService.postRegister(myUser)
                 registerResponse.value =  apiResponse
@@ -70,16 +73,15 @@ class MarathonViewModel:ViewModel(){
                 // Hata yönetimi burada yapılabilir
                 e.printStackTrace()
             }
-        }
+
     }
     //loginScreen
     var loginEmail = mutableStateOf("")
     var loginPassword = mutableStateOf("")
     var loginResponse= mutableStateOf<PostLoginResponseModel?>(null)
 
-    fun sendLogin(){
+    suspend fun sendLogin(){
         var myUser = LoginRequestModel(loginEmail.value,loginPassword.value)
-        CoroutineScope(Dispatchers.IO).launch {
             try {
                 val apiResponse = apiService.postLogin(myUser)
                 loginResponse.value =  apiResponse
@@ -88,11 +90,11 @@ class MarathonViewModel:ViewModel(){
                 // Hata yönetimi burada yapılabilir
                 e.printStackTrace()
             }
-        }
+
     }
 
-    //Post Feed Screen
-    /*
+    //post feed screen
+
     var postLists = mutableStateOf<GetSocialPostsResponseModel?>(null)
 
     fun getPosts(){
@@ -110,7 +112,7 @@ class MarathonViewModel:ViewModel(){
         }
     }
 
-     */
+
 
 
 

@@ -6,6 +6,8 @@ data class SocialPostsResponse(
     val post_text:String,
     val post_like:List<String>,
     val comment_count:Int,
+    val userName:String,
+    val user_image:ByteArray
 
 
     )

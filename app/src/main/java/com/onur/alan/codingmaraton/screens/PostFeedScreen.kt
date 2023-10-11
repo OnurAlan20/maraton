@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -25,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.onur.alan.codingmaraton.Navigation.Screens
 import com.onur.alan.codingmaraton.R
 import com.onur.alan.codingmaraton.components.MyBottomAppBar
 import com.onur.alan.codingmaraton.components.MyPost
@@ -32,6 +34,9 @@ import com.onur.alan.codingmaraton.components.MySendPostButton
 
 @Composable
 fun PostFeedScreen(viewModel: MarathonViewModel,navController: NavController){
+
+
+
     Surface(modifier = Modifier.fillMaxSize(), color = colorResource(id = R.color.my_white),
         ) {
         Column(
@@ -71,10 +76,34 @@ fun PostFeedScreen(viewModel: MarathonViewModel,navController: NavController){
                 Divider(thickness = 2.dp, color = colorResource(id = R.color.my_logo_red), modifier = Modifier.fillMaxWidth())
                 Spacer(modifier = Modifier.height(10.dp))
                 LazyColumn {
-                    items(10){
-                        //MyPost()
+                    items(
+                        viewModel.postLists.value!!.message
+                    ){
+                        post->
+                        MyPost(
+                            viewModel = viewModel,
+                            navController = navController,
+                            name = post.userName,
+                            bio = post.post_text,
+                            bitmap = viewModel.byteArrayToBitmap(post.post_image),
+                            userPP = viewModel.byteArrayToBitmap(post.user_image)
+                        )
+
                         Spacer(modifier = Modifier.height(6.dp))
+
                     }
+                   /*
+                    items(viewModel.postLists.value.message){post->
+
+                        /*MyPost(
+                            name = viewModel.postLists.value.message[i].userName,
+                            bio = viewModel.postLists.value.message[i].post_text,
+                            bitmap = viewModel.byteArrayToBitmap(viewModel.postLists.value.message[i].post_image),
+                            userPP = viewModel.byteArrayToBitmap(viewModel.postLists.value.message[i].user_image)
+                        )
+                        */
+                        Spacer(modifier = Modifier.height(6.dp))
+                    }*/
                 }
 
 
@@ -91,6 +120,7 @@ fun PostFeedScreen(viewModel: MarathonViewModel,navController: NavController){
 
             ) {
                 MySendPostButton {
+                    navController.navigate(Screens.SendPostScreen.route)
 
                 }
 

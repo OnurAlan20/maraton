@@ -32,11 +32,13 @@ class MainActivity : ComponentActivity() {
     val bcv = MarathonViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
-            bcv.initRetrofit()
             val navController = rememberNavController()
-            //Navigation(viewModel = bcv, navController = navController)
-            PostFeedScreen(viewModel = bcv, navController =navController )
+            bcv.initRetrofit()
+
+            Navigation(viewModel = bcv, navController = navController)
+            //PostFeedScreen(viewModel = bcv, navController =navController )
 
         }
     }

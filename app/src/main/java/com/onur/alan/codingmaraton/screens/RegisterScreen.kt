@@ -10,12 +10,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Email
-import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -29,6 +27,9 @@ import com.onur.alan.codingmaraton.R
 import com.onur.alan.codingmaraton.components.MyButton
 import com.onur.alan.codingmaraton.components.MyDoubleTextButton
 import com.onur.alan.codingmaraton.components.RegisterTextField
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
 fun RegisterScreen(viewModel: MarathonViewModel,navController: NavController){
@@ -86,10 +87,14 @@ fun RegisterScreen(viewModel: MarathonViewModel,navController: NavController){
                 ) )
                 Spacer(modifier = Modifier.height(20.dp))
                 MyButton(text = "KAYIT OL") {
-                    viewModel.sendRegister()
-                    if (viewModel.loginResponse.value?.status == 200){
-                        navController.navigate(Screens.LoginScreen.route)
-                    }
+                   CoroutineScope(Dispatchers.Main).launch {
+                       viewModel.sendRegister()
+
+                   }.invokeOnCompletion {
+                       if (viewModel.registerResponse.value!!.status == 200){
+                           navController.navigate(Screens.LoginScreen.route)
+                       }
+                   }
 
                 }
             }
