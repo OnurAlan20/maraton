@@ -65,9 +65,9 @@ class MarathonViewModel:ViewModel(){
 
 
     suspend fun sendRegister() {
-        var myUser = RegisterRequestModel(registerEmail.value,registerFirstName.value,registerLastName.value,registerUserName.value,registerPassword.value)
+        var myUser1 = RegisterRequestModel(registerEmail.value,registerFirstName.value,registerLastName.value,registerUserName.value,registerPassword.value)
             try {
-                val apiResponse = apiService.postRegister(myUser)
+                val apiResponse = apiService.postRegister(myUser1)
                 registerResponse.value =  apiResponse
             } catch (e: Exception) {
                 // Hata yönetimi burada yapılabilir
@@ -85,6 +85,7 @@ class MarathonViewModel:ViewModel(){
             try {
                 val apiResponse = apiService.postLogin(myUser)
                 loginResponse.value =  apiResponse
+                println(loginResponse.value?.message?.lastName)
 
             } catch (e: Exception) {
                 // Hata yönetimi burada yapılabilir

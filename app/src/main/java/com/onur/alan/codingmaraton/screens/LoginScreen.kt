@@ -76,7 +76,7 @@ fun LoginScreen(viewModel: MarathonViewModel,navController: NavController){
 
                     }.invokeOnCompletion {
                         if (viewModel.loginResponse.value?.status == 200){
-                            navController.navigate(Screens.LoginScreen.route)
+                            navController.navigate(Screens.PostFeedScreen.route)
                         }
                     }
 
