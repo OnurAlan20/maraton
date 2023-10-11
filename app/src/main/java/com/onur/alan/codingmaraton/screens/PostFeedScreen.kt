@@ -1,5 +1,7 @@
 package com.onur.alan.codingmaraton.screens
 
+import android.graphics.drawable.Drawable
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,22 +20,35 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.graphics.drawable.toBitmap
 import androidx.navigation.NavController
 import com.onur.alan.codingmaraton.Navigation.Screens
 import com.onur.alan.codingmaraton.R
 import com.onur.alan.codingmaraton.components.MyBottomAppBar
+import com.onur.alan.codingmaraton.components.MyDumyPost
 import com.onur.alan.codingmaraton.components.MyPost
 import com.onur.alan.codingmaraton.components.MySendPostButton
+import kotlinx.coroutines.Dispatchers
+import kotlin.random.Random
 
 @Composable
 fun PostFeedScreen(viewModel: MarathonViewModel,navController: NavController){
+    val context = LocalContext.current
+    LaunchedEffect(Dispatchers.IO) {
+        viewModel.getPosts()
+
+    }
 
 
 
@@ -62,9 +77,6 @@ fun PostFeedScreen(viewModel: MarathonViewModel,navController: NavController){
                     color = colorResource(id = R.color.my_purple),
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 25.sp)
-
-
-
             }
             Column(
                 modifier = Modifier
@@ -75,36 +87,62 @@ fun PostFeedScreen(viewModel: MarathonViewModel,navController: NavController){
             ) {
                 Divider(thickness = 2.dp, color = colorResource(id = R.color.my_logo_red), modifier = Modifier.fillMaxWidth())
                 Spacer(modifier = Modifier.height(10.dp))
+                var ind =  2;
                 LazyColumn {
-                    items(
-                        viewModel.postLists.value!!.message
-                    ){
-                        post->
-                        MyPost(
-                            viewModel = viewModel,
-                            navController = navController,
-                            name = post.userName,
-                            bio = post.post_text,
-                            bitmap = viewModel.byteArrayToBitmap(post.post_image),
-                            userPP = viewModel.byteArrayToBitmap(post.user_image)
-                        )
+                    viewModel.postLists.value?.let {
+                        items(
+                            it.message.asReversed()
+                        ){ post->
+                            if (post.post_text=="TestPost"){
+                                var a = getDrawable(context, R.drawable.kahve_kitap)
+                                var b = a?.toBitmap()
+                                MyPost(
+                                    viewModel = viewModel,
+                                    navController = navController,
+                                    name = post.userName,
+                                    bio = post.post_text,
+                                    bitmap = b,
+                                    userPP = viewModel.byteArrayToBitmapPP(post.user_image, context = context)
+                                )
+                            }else{
+                                var v = ind
+                                println(v)
+                                var a:Drawable?;
+                                if (v == 1){
+                                    a = getDrawable(context,R.drawable.manzara_ornek)
+                                }
+                                else if (v == 2){
+                                    a = getDrawable(context,R.drawable.gri_koc)
+                                }
+                                else if (v == 3){
+                                    a = getDrawable(context, R.drawable.beyaz_kitap)
+                                }
+                                else{
+                                    a = getDrawable(context,R.drawable.mqdefault)
+                                }
+                                var b = a?.toBitmap()
+                                MyPost(
+                                    viewModel = viewModel,
+                                    navController = navController,
+                                    name = post.userName,
+                                    bio = post.post_text,
+                                    bitmap = b,
+                                    userPP = viewModel.byteArrayToBitmapPP(post.user_image, context = context)
+                                )
+                                ind++;
+                            }
 
-                        Spacer(modifier = Modifier.height(6.dp))
+                            Spacer(modifier = Modifier.height(6.dp))
 
+                        }
                     }
-                   /*
-                    items(viewModel.postLists.value.message){post->
 
-                        /*MyPost(
-                            name = viewModel.postLists.value.message[i].userName,
-                            bio = viewModel.postLists.value.message[i].post_text,
-                            bitmap = viewModel.byteArrayToBitmap(viewModel.postLists.value.message[i].post_image),
-                            userPP = viewModel.byteArrayToBitmap(viewModel.postLists.value.message[i].user_image)
-                        )
-                        */
-                        Spacer(modifier = Modifier.height(6.dp))
-                    }*/
                 }
+
+
+
+
+
 
 
 

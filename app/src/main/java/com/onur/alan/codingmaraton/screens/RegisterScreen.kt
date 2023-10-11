@@ -26,6 +26,7 @@ import com.onur.alan.codingmaraton.Navigation.Screens
 import com.onur.alan.codingmaraton.R
 import com.onur.alan.codingmaraton.components.MyButton
 import com.onur.alan.codingmaraton.components.MyDoubleTextButton
+import com.onur.alan.codingmaraton.components.RegisterPasswordTextField
 import com.onur.alan.codingmaraton.components.RegisterTextField
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -82,7 +83,7 @@ fun RegisterScreen(viewModel: MarathonViewModel,navController: NavController){
                 ) )
                 Spacer(modifier = Modifier.height(10.dp))
 
-                RegisterTextField(value = viewModel.registerPassword, placeHolder ="şifre", icon = painterResource(
+                RegisterPasswordTextField(value = viewModel.registerPassword, placeHolder ="şifre", icon = painterResource(
                     id = R.drawable.password
                 ) )
                 Spacer(modifier = Modifier.height(20.dp))

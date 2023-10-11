@@ -24,7 +24,7 @@ data class SocialPostSendCommentRequestModel(
 )
 data class SocialPostCreateRequestModel(
     val user_uid:String,
-    val post_image:ByteArray,
+    val post_image:ByteArray?,
     val post_text:String
 
 )
@@ -61,7 +61,7 @@ data class QuestionApproveRequestModel(
 )
 data class AskQuestionRequestModel(
     val user_uid: String,
-    val question_image:String,
+    val question_image:ByteArray?,
     val question_text:String
 
 )

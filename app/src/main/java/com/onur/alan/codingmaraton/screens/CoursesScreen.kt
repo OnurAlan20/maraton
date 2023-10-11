@@ -25,6 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.onur.alan.codingmaraton.Navigation.Screens
 import com.onur.alan.codingmaraton.R
 import com.onur.alan.codingmaraton.components.MyBottomAppBar
 import com.onur.alan.codingmaraton.components.MyCourseBox
@@ -73,8 +74,17 @@ fun CoursesScreen(viewModel: MarathonViewModel,navController: NavController){
                 Divider(thickness = 2.dp, color = colorResource(id = R.color.my_logo_red), modifier = Modifier.fillMaxWidth())
                 Spacer(modifier = Modifier.height(10.dp))
                 LazyColumn {
-                    items(10){
-                        MyCourseBox()
+                    items(1){
+                        MyCourseBox(navController,R.drawable.tek__ucgenler,"Rehber Matematik","15 Saat'de Üçgenler"){
+                            navController.navigate(Screens.CourseMainScreen.route)
+                        }
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        MyCourseBox(navController,R.drawable.polinomlar,"Rehber Matematik","2 saat'de Polinomlar"){
+                            navController.navigate(Screens.CourseMainScreen.route)
+
+                        }
+
                         Spacer(modifier = Modifier.height(6.dp))
                     }
                 }

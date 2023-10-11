@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -31,6 +32,7 @@ import com.onur.alan.codingmaraton.components.MyBottomAppBar
 import com.onur.alan.codingmaraton.components.MyPost
 import com.onur.alan.codingmaraton.components.MySendPostButton
 import com.onur.alan.codingmaraton.components.PostComments
+import com.onur.alan.codingmaraton.model.LastPostComment
 
 @Composable
 fun PostCommentScreen(viewModel: MarathonViewModel,navController: NavController){
@@ -76,10 +78,28 @@ fun PostCommentScreen(viewModel: MarathonViewModel,navController: NavController)
                 Spacer(modifier = Modifier.height(10.dp))
 
                 LazyColumn {
-                    items(10){
+                    items(viewModel.postCommentList){item ->
+                        PostComments(name = item.name, message = item.message)
+                        Spacer(modifier = Modifier.height(5.dp))
+
+                    }
+                    /*
+                    items(){
                         PostComments(name = "Onur Alan", message = "Bu baya iyi post yanlız!")
                         Spacer(modifier = Modifier.height(5.dp))
+
+                        PostComments(name = "Şevval Ensarioğlu", message = "İnanılmaz")
+                        Spacer(modifier = Modifier.height(5.dp))
+
+                        PostComments(name = "Sarp Dora Yönden", message = "Beğeniye Beğeni")
+
+                        Spacer(modifier = Modifier.height(5.dp))
+
+
+
                     }
+
+                     */
                 }
 
             }
@@ -95,7 +115,7 @@ fun PostCommentScreen(viewModel: MarathonViewModel,navController: NavController)
             ) {
                 CommentTextField(value = viewModel.commentTextField, placeHolder = "", icon = painterResource(
                     id = R.drawable.baseline_send_24
-                ))
+                ),viewModel)
 
             }
             Row(

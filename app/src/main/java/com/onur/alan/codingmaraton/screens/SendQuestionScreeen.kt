@@ -29,6 +29,9 @@ import com.onur.alan.codingmaraton.components.MyBottomAppBar
 import com.onur.alan.codingmaraton.components.MySendPostButton
 import com.onur.alan.codingmaraton.components.SelectImage
 import com.onur.alan.codingmaraton.components.SendPostTextField
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
 fun SendQuestionScreen(viewModel: MarathonViewModel,navController: NavController){
@@ -70,7 +73,9 @@ fun SendQuestionScreen(viewModel: MarathonViewModel,navController: NavController
             ) {
                 Divider(thickness = 2.dp, color = colorResource(id = R.color.my_logo_red), modifier = Modifier.fillMaxWidth())
                 Spacer(modifier = Modifier.height(10.dp))
-                SelectImage()
+                SelectImage(){
+
+                }
                 Spacer(modifier = Modifier.height(10.dp))
                 SendPostTextField(value = viewModel.sendPostTextField, placeHolder = "açıklama yaz")
                 Spacer(modifier = Modifier.height(60.dp))

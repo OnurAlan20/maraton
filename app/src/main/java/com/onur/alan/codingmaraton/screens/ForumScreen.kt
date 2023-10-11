@@ -17,6 +17,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -25,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.onur.alan.codingmaraton.Navigation.Screens
 import com.onur.alan.codingmaraton.R
 import com.onur.alan.codingmaraton.components.MyBottomAppBar
 import com.onur.alan.codingmaraton.components.MyForumPost
@@ -33,6 +35,10 @@ import com.onur.alan.codingmaraton.components.MySendPostButton
 
 @Composable
 fun ForumMainScreen(viewModel: MarathonViewModel,navController: NavController){
+    //LaunchedEffect(Unit) {
+        //viewModel.getCourses()
+
+    //}
     Surface(modifier = Modifier.fillMaxSize(), color = colorResource(id = R.color.my_white),
     ) {
         Column(
@@ -73,8 +79,13 @@ fun ForumMainScreen(viewModel: MarathonViewModel,navController: NavController){
                 Divider(thickness = 2.dp, color = colorResource(id = R.color.my_logo_red), modifier = Modifier.fillMaxWidth())
                 Spacer(modifier = Modifier.height(10.dp))
                 LazyColumn {
-                    items(10){
-                        MyForumPost()
+                    items(1){
+                        MyForumPost(navController,R.drawable.pp1,R.drawable.geometri)
+                        Spacer(modifier = Modifier.height(6.dp))
+
+                        MyForumPost(navController,R.drawable.pp1,R.drawable.soru2)
+
+
                         Spacer(modifier = Modifier.height(6.dp))
                     }
                 }
@@ -93,7 +104,7 @@ fun ForumMainScreen(viewModel: MarathonViewModel,navController: NavController){
 
             ) {
                 MySendPostButton {
-
+                    navController.navigate(Screens.SendQuestionScreen.route)
                 }
 
             }

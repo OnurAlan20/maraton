@@ -14,6 +14,8 @@ sealed class Screens(val route: String){
     object SendPostScreen: Screens("send_post_screen")
     object SendQuestionScreen: Screens("send_question_screen")
 
+    object WatchCourseScreen: Screens("watch_course_screen")
+
 
 }
 

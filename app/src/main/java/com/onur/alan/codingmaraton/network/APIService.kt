@@ -48,10 +48,10 @@ interface APIService {
     suspend fun getOneSocialPost(@Path("post_uid") post_uid: String):OneSocialPost
 
     @POST("/social/post/comment")
-    suspend fun postData(@Body request:SocialPostSendCommentRequestModel ):PostLoginResponseModel
+    suspend fun postSendPostComment(@Body request:SocialPostSendCommentRequestModel ):PostLoginResponseModel
 
     @POST("/social/post/create")
-    suspend fun postData(@Body request:SocialPostCreateRequestModel ):SocialPostCreateResponseModel
+    suspend fun postCreateSocialPost(@Body request:SocialPostCreateRequestModel ):SocialPostCreateResponseModel
 
     @GET("/user/profile/{user_uid}/courses")
     suspend fun getSocialPosts(@Path("user_uid") user_uid: String):GetSocialPostsResponseModel

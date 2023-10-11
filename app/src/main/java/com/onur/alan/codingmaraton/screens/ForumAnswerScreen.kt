@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -26,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.onur.alan.codingmaraton.R
+import com.onur.alan.codingmaraton.components.AnswerTextField
 import com.onur.alan.codingmaraton.components.CommentTextField
 import com.onur.alan.codingmaraton.components.ForumAnswers
 import com.onur.alan.codingmaraton.components.MyBottomAppBar
@@ -73,15 +75,30 @@ fun ForumAnswerScreen(viewModel:MarathonViewModel,navController: NavController){
             ) {
                 Divider(thickness = 2.dp, color = colorResource(id = R.color.my_logo_red), modifier = Modifier.fillMaxWidth())
                 Spacer(modifier = Modifier.height(10.dp))
-                MyForumPost()
-                Spacer(modifier = Modifier.height(10.dp))
-
                 LazyColumn {
-                    items(10){
+                    items(viewModel.questionAnswerList){
+                        it->
+                        ForumAnswers(name = it.name, message = it.message)
+                        Spacer(modifier = Modifier.height(6.dp))
+
+                    }
+
+                }
+
+
+            /*
+                    items(1){
+
+                        MyForumPost(navController, idPP = R.drawable.pp1,R.drawable.geometri)
+                        Spacer(modifier = Modifier.height(10.dp))
                         ForumAnswers(name = "Onur Alan", message = "Bu baya iyi post yanlız!")
+                        Spacer(modifier = Modifier.height(5.dp))
+                        ForumAnswers(name = "Sarp Dora", message = "H2 mollekulleri arasındaki bag iyonik o yuzden cevap D")
                         Spacer(modifier = Modifier.height(5.dp))
                     }
                 }
+
+                     */
 
             }
 
@@ -94,9 +111,9 @@ fun ForumAnswerScreen(viewModel:MarathonViewModel,navController: NavController){
                 verticalAlignment = Alignment.CenterVertically
 
             ) {
-                CommentTextField(value = viewModel.commentTextField, placeHolder = "", icon = painterResource(
+                AnswerTextField(value = viewModel.answerTextField, placeHolder = "", icon = painterResource(
                     id = R.drawable.baseline_send_24
-                )
+                ),viewModel
                 )
 
             }

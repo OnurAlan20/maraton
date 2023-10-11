@@ -74,8 +74,10 @@ dependencies {
 
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
 
+    //Coil
     implementation ("io.coil-kt:coil:2.4.0")
 
+    implementation ("androidx.webkit:webkit:1.4.0")
 
 
     testImplementation("junit:junit:4.13.2")

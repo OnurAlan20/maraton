@@ -76,7 +76,7 @@ fun CourseMainScreen(viewModel: MarathonViewModel,navController: NavController){
                 Divider(thickness = 2.dp, color = colorResource(id = R.color.my_logo_red), modifier = Modifier.fillMaxWidth())
                 Spacer(modifier = Modifier.height(30.dp))
                 Surface(modifier = Modifier.size(150.dp)) {
-                    Image(painter = painterResource(id = R.drawable.manzara_ornek), contentDescription ="" )
+                    Image(painter = painterResource(id = R.drawable.tek__ucgenler), contentDescription ="" )
                 }
                 Column(
                     Modifier
@@ -91,7 +91,7 @@ fun CourseMainScreen(viewModel: MarathonViewModel,navController: NavController){
                         fontSize = 25.sp)
                     Spacer(modifier = Modifier.height(10.dp))
 
-                    Text(text = "Şevval Ensarioğlu",
+                    Text(text = "Kubra Bilgic",
                         color = colorResource(id = R.color.my_red),
                         fontWeight = FontWeight.Light,
                         fontSize = 20.sp)
@@ -152,7 +152,7 @@ fun CourseMainScreen(viewModel: MarathonViewModel,navController: NavController){
                             fontWeight = FontWeight.Light,
                             fontSize = 20.sp)
                         Spacer(modifier = Modifier.height(5.dp))
-                        Text(text = "vjkakjkedjfn fjkvdjksnjhvf sjkdfvcfkjshnfj bcjfkhsjfv",
+                        Text(text = "Bu kurs ile cok iyi seviyelere geleceksin....",
                             color = colorResource(id = R.color.black),
                             fontWeight = FontWeight.Light,
                             fontSize = 18.sp)

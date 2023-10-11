@@ -18,6 +18,7 @@ import com.onur.alan.codingmaraton.screens.ProfileScreen
 import com.onur.alan.codingmaraton.screens.RegisterScreen
 import com.onur.alan.codingmaraton.screens.SendPostScreen
 import com.onur.alan.codingmaraton.screens.SendQuestionScreen
+import com.onur.alan.codingmaraton.screens.WatchCourseScreen
 
 @Composable
 fun Navigation(viewModel: MarathonViewModel, navController: NavHostController){
@@ -59,7 +60,9 @@ fun Navigation(viewModel: MarathonViewModel, navController: NavHostController){
         composable(route = Screens.SendQuestionScreen.route ){
             SendQuestionScreen(viewModel = viewModel,navController)
         }
-
+        composable(route = Screens.WatchCourseScreen.route ){
+            WatchCourseScreen(viewModel = viewModel,navController)
+        }
 
 
 

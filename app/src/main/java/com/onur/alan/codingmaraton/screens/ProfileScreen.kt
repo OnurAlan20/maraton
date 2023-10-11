@@ -27,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.onur.alan.codingmaraton.Navigation.Screens
 import com.onur.alan.codingmaraton.R
 import com.onur.alan.codingmaraton.components.MyBottomAppBar
 import com.onur.alan.codingmaraton.components.MyCourseBox
@@ -86,7 +87,7 @@ fun ProfileScreen(viewModel: MarathonViewModel,navController: NavController){
                     Column(modifier = Modifier
                         .fillMaxWidth(0.3f)
                         .fillMaxHeight()) {
-                        Image(painter = painterResource(id = R.drawable.manzara_ornek),
+                        Image(painter = painterResource(id = R.drawable.account),
                             contentDescription ="",
                             modifier = Modifier
                                 .clip(shape = CircleShape)
@@ -101,24 +102,24 @@ fun ProfileScreen(viewModel: MarathonViewModel,navController: NavController){
                         horizontalAlignment = Alignment.Start,
                         verticalArrangement = Arrangement.Top
                     ) {
-                        Text(text = "Sarp Dora Yönden",
+                        Text(text = "Mehmet Akif",
                             color = colorResource(id = R.color.black),
                             fontWeight = FontWeight.SemiBold,
                             fontSize = 20.sp)
                         Spacer(modifier = Modifier.height(10.dp))
-                        Text(text = "sinemakisarp",
+                        Text(text = "mehmetak23",
                             color = colorResource(id = R.color.my_red),
                             fontWeight = FontWeight.Light,
                             fontSize = 18.sp)
                         Spacer(modifier = Modifier.height(10.dp))
                         MyEditProfileButton(text = "profili düzenle") {
-                            
+                            navController.navigate(Screens.ProfileEditScreen.route)
                         }
                     }
 
                 }
                 Spacer(modifier = Modifier.height(1.dp))
-                Text(text = "merhaba ben sinemadaki sarp backend yazıyorum tşkb bb iyi günler.", fontSize = 16.sp)
+                Text(text = "Profilinizi doldurunuz.", fontSize = 16.sp)
                 Spacer(modifier = Modifier.height(10.dp))
                 Column(modifier = Modifier
                     .fillMaxSize()
@@ -129,8 +130,11 @@ fun ProfileScreen(viewModel: MarathonViewModel,navController: NavController){
                         fontSize = 24.sp)
                     Spacer(modifier = Modifier.height(5.dp))
                     LazyColumn {
-                        items(10){
-                            MyCourseBox()
+                        items(1){
+                            MyCourseBox(navController,R.drawable.tek__ucgenler,"Rehber Matematik","15 Saat'de Üçgenler"){
+                                navController.navigate(Screens.WatchCourseScreen.route)
+
+                            }
                             Spacer(modifier = Modifier.height(6.dp))
                         }
                     }

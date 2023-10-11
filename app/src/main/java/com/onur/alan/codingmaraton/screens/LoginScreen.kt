@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.onur.alan.codingmaraton.Navigation.Screens
 import com.onur.alan.codingmaraton.R
+import com.onur.alan.codingmaraton.components.LoginPasswordTextField
 import com.onur.alan.codingmaraton.components.LoginTextField
 import com.onur.alan.codingmaraton.components.MyButton
 import com.onur.alan.codingmaraton.components.MyDoubleTextButton
@@ -67,7 +68,7 @@ fun LoginScreen(viewModel: MarathonViewModel,navController: NavController){
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                LoginTextField(value = viewModel.loginPassword, placeHolder ="şifre", icon =Icons.Outlined.Lock )
+                LoginPasswordTextField(value = viewModel.loginPassword, placeHolder ="şifre", icon =Icons.Outlined.Lock )
                 Spacer(modifier = Modifier.height(35.dp))
                 MyButton(text = "GİRİŞ YAP") {
 
@@ -76,7 +77,7 @@ fun LoginScreen(viewModel: MarathonViewModel,navController: NavController){
 
                     }.invokeOnCompletion {
                         if (viewModel.loginResponse.value?.status == 200){
-                            navController.navigate(Screens.LoginScreen.route)
+                            navController.navigate(Screens.PostFeedScreen.route)
                         }
                     }
 
